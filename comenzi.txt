@@ -1,0 +1,35 @@
+0101
+
+pr 1 - 
+
+
+en
+conf t
+ip route 27.177.5.0 255.255.255.248 27.177.5.9
+(adresa unde vreau sa ajung, masca si adresa ip prin care  ies)
+
+br 1 
+gr 1 
+yr 2
+
+ip route 27.177.5.8 255.255.255.252 27.177.5.3
+
+
+0110
+2.
+
+xsw1
+int fa4/1
+spanning-tree vlan 196 port-priority 32
+spanning-tree vlan 281 port-priority 64
+int fa5/1
+spanning-tree vlan 196 port-priority 64
+spanning-tree vlan 281 port-priority 32
+
+xs2
+int fa4/1
+spanning-tree vlan 196 port-priority 32
+spanning-tree vlan 281 port-priority 64
+int fa5/1
+spanning-tree vlan 196 port-priority 64
+spanning-tree vlan 281 port-priority 32
