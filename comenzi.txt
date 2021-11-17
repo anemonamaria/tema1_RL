@@ -2,7 +2,6 @@
 
 pr 1 - 
 
-
 en
 conf t
 ip route 27.177.5.0 255.255.255.248 27.177.5.9
@@ -33,3 +32,70 @@ spanning-tree vlan 281 port-priority 64
 int fa5/1
 spanning-tree vlan 196 port-priority 64
 spanning-tree vlan 281 port-priority 32
+
+0111.
+NU
+pr1
+
+ip route 27.177.1.0 255.255.255.0 27.177.5.9
+ip route 27.177.4.192 255.255.255.224 27.177.5.9
+
+br1
+
+ip route 27.177.4.128 255.255.255.192 27.177.5.3
+ip route 27.177.3.0 255.255.255.128 27.177.5.3
+ip route 27.177.2.0 255.255.255.0 27.177.5.3
+
+gr1
+ip route 27.177.4.0 255.255.255.128 27.177.5.3
+ip route 27.177.3.128 255.255.255.128 27.177.5.3
+
+yr2
+ip route 27.177.4.224 255.255.255.224 27.177.5.3
+
+NU
+
+br1
+ip route 27.177.5.0 255.255.255.248 27.177.5.3
+ip route 27.177.5.8 255.255.255.252 27.177.5.9
+
+gr1
+ip route 27.177.5.0 255.255.255.248 27.177.5.3
+ip route 27.177.5.8 255.255.255.252 27.177.5.9
+
+yr2
+ip route 27.177.5.8 255.255.255.252 27.177.5.9
+
+RUTE
+
+pe YR1,PR1,BR1,GR1
+spre H: ip route IP_H M_H (ipf0/1)YR2 (din XR1)
+ip route 27.177.4.224 255.255.255.224 27.177.5.4
+-------
+pe YR2,YR1,GR1,BR1
+spre C: ip route IP_C M_C (ipf1/0)PR1  (din XR2)
+ip route 27.177.4.192 255.255.255.224 27.177.5.10
+spre D: ip route IP_D M_D (ipf1/0)PR1  (din XR2)
+ip route 27.177.1.0 255.255.255.0 27.177.5.10
+------
+pe YR2,YR1,GR1,PR1
+spre E: ip route IP_E M_E (ipf0/1)BR1 (din XR1)
+ip route 27.177.4.128 255.255.255.192 27.177.5.2
+spre G: ip route IP_G M_G (ipf0/1)BR1 (din XR1)
+ip route 27.177.3.0 255.255.255.128 27.177.5.2
+spre F: ip route IP_F M_F (ipf0/1)BR1 (din XR1)
+ip route 27.177.2.0 255.255.255.0 27.177.5.2
+------
+pe YR1,YR2,BR1,PR1
+spre A: ip route IP_A M_A (ipf0/1)GR1 (din XR1)
+ip route 27.177.4.0 255.255.255.128 27.177.5.1
+spre B: ip route IP_B M_B (ipf0/1)GR1 (din XR1)
+ip route 27.177.3.128 255.255.255.128 27.177.5.1
+----
+pe PR1
+spre I: ip route IP_I M_I (ipf0/1.XR2)YR1 (din XR2)
+ip route 27.177.0.0 255.255.255.0 27.177.5.9
+----
+pe YR2,GR1,BR1
+spre I: ip route IP_I M_I (ipf0/1.XR1)YR1 (din XR1)
+ip route 27.177.0.0 255.255.255.0 27.177.5.3
